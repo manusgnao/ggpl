@@ -1,6 +1,7 @@
 """workshop_02"""
 from pyplasm import *
 import csv
+import numpy as np
 """
 weightBeams ---> lunghezza delle travi tra i pilastri dell'edificio
 heightPilars ---> lunghezza dei pilastri dell'edificio
@@ -9,16 +10,40 @@ pilarWeight ---> larghezza di un pilastro
 beamWeight ---> larghezza delle travi, sempre la meta' dei pilastri in modo 
 				 che una trave possa sempre poggiare su un pilastro
 """
-weightBeams = [5.0, 2.5, 5.0]
-heightPilars = [4.0, 3.5, 2.0]
-floorDepth = [2.0, 3.0, 3.0, 3.0, 3.0, 3.0, 5.0]
-pilarWeight = 0.5
-beamWeight = pilarWeight/2.0
+#weightBeams = [5.0, 2.5, 5.0]
+#heightPilars = [4.0, 3.5, 2.0]
+#floorDepth = [2.0, 3.0, 3.0, 3.0, 3.0, 3.0, 5.0]
+#pilarWeight = 0.5
+#beamWeight = pilarWeight/2.0
 
 with open('frame_data_435861.csv', 'rb') as csvfile:
     dialect = csv.Sniffer().sniff(csvfile.read(1024))
     csvfile.seek(0)
-    reader = csv.reader(csvfile, dialect)
+    reader = csv.reader(csvfile, dialect, delimiter=';')
+    for i,row in enumerate(reader):
+    	if i == 0:
+    		weightBeams = row
+    		weightBeams = filter(None, weightBeams)
+    		weightBeams = np.array(weightBeams, dtype=float)
+    		print weightBeams
+    	if i == 1:
+    		heightPilars = row
+    		heightPilars = filter(None, heightPilars)
+    		heightPilars = np.array(heightPilars, dtype=float)
+    		print heightPilars
+    	if i == 2:
+    		floorDepth = row
+    		floorDepth = filter(None, floorDepth)
+    		floorDepth = np.array(floorDepth, dtype=float)
+    		print floorDepth
+    	if i == 3:
+    		pilarWeight = row[0]
+    		pilarWeight = float(pilarWeight)
+    	if i == 4:
+    		beamWeight = row[0]
+    		beamWeight = float(beamWeight)
+
+
 """
 inizializzo una struttura vuota in cui verra' costruito il telaio
 """
