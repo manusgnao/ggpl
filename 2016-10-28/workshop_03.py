@@ -12,18 +12,18 @@ dx --> larghezza gradino (parametro formale X)
 dy --> lunghezza gradino (parametro formale Y)
 dz --> altezza gradino (parametro formale Z)
 """
-wall = 0.5
-ground = 0.20
+wall=0.5
+ground=0.20
 footboard=1.0
-height = 3.0
-length = 6.0
+height=3.0
+length=6.0
 steps=10.0
 dx= 3.5
 dy=length/steps
 dz=height/steps
 """inizializzazione struttura vuota in cui verra' costruita la scala"""
-elem0 = CUBOID([0,0,0])
-struct = STRUCT([elem0])
+elem0=CUBOID([0,0,0])
+struct=STRUCT([elem0])
 
 
 """
@@ -34,37 +34,23 @@ della loro altezza e della lunghezza del pianerottolo
 """
 def buildStair(x,y,z,tempWeight,tempHeight,tempStruct):
 	if(2.0*length/5.0<tempWeight<4.0*length/5.0):
-		step = COLOR(BROWN)(CUBOID([x, y*3, z]))
-		traslation = STRUCT([T([1,2,3])([wall/3,tempWeight,tempHeight]),step])
-		tempWeight = tempWeight + y*3.0
-		tempHeight = tempHeight + z	
+		step=COLOR(BROWN)(CUBOID([x, y*3, z]))
+		traslation=STRUCT([T([1,2,3])([wall/3,tempWeight,tempHeight]),step])
+		tempWeight=tempWeight + y*3.0
+		tempHeight=tempHeight + z	
 	else:
-		step = COLOR(BROWN)(CUBOID([x, y, z]))
-		traslation = STRUCT([T([1,2,3])([wall/3,tempWeight,tempHeight]),step])
-		tempWeight = tempWeight + y
-		tempHeight = tempHeight + z
-	stair = STRUCT([traslation,tempStruct])
+		step=COLOR(BROWN)(CUBOID([x, y, z]))
+		traslation=STRUCT([T([1,2,3])([wall/3,tempWeight,tempHeight]),step])
+		tempWeight=tempWeight + y
+		tempHeight=tempHeight + z
+	stair=STRUCT([traslation,tempStruct])
 	if tempWeight < length+y:
 		buildStair(x, y, z, tempWeight, tempHeight, stair)
 	else:
-		""" PAOLO VERSION
-		p = CUBOID([dx+wall/2,length+footboard,ground])
-		t = COLOR(BLACK)(CUBOID([1.0, length, 1.0]))
-		t_t1 = STRUCT([R([2,3])(3.14/6.5)(t)])
-		t_t = STRUCT([T([1,2])([x/2.0,footboard+y*1.5]), t_t1])
-		m = CUBOID([wall,length+footboard,height+ground])
-		m_t = STRUCT([T(3)(dz),m])
-		p2 = CUBOID([dx+wall/2,length+z,ground])
-		p_t = STRUCT([T([2,3])([l+y,h]),p2])
-		all_scale = STRUCT([T([2,3])([footboard,ground]),all_scale])		
-		finalStairs = STRUCT([t_t,m,p,p_t,all_scale])
-		"""
-
-		""" SHIT VERSION WITHOUT GRAVITY """
-		m = CUBOID([wall,length+footboard+y*2,height+ground])
-		p = CUBOID([dx+wall/2,length+footboard+y*2,ground])
-		stair = STRUCT([T([2,3])([footboard,ground]),stair])		
-		finalStairs = STRUCT([m,p,stair])
+		m=CUBOID([wall,length+footboard+y*2,height+ground])
+		p=CUBOID([dx+wall/2,length+footboard+y*2,ground])
+		stair=STRUCT([T([2,3])([footboard,ground]),stair])		
+		finalStairs=STRUCT([m,p,stair])
 
 		VIEW(finalStairs)
 
