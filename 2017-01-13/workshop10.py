@@ -295,7 +295,7 @@ def buildStairs(tempLength,tempHeight,structure):
 
 """funzione finale che assembla i risultati di tutte le funzioni precedenti"""
 
-def buildHouse():
+def multistorey_house():
   firstFloor = buildFirstFloor(0,initStruct)
   secondFloor = buildSecondFloor(0,firstFloor,initStruct)
   external = buildExternal(0,0,0.0,initStruct)
@@ -316,4 +316,4 @@ def buildHouse():
   house=STRUCT([house,T(3)(325.0),roof_level_2])
   VIEW(house)
 
-buildHouse()
+multistorey_house()
