@@ -2,6 +2,7 @@
 from pyplasm import *
 
 depth = 0.2
+roofTexture = "texture/roof.jpg"
 
 """le 3 dimensioni del tetto"""
 x = [1.0,7.0,11.0,15.0,21.0]
@@ -31,7 +32,8 @@ newVerts = [[x[0],y[2],z[1]+depth*2],[x[4],y[3]+depth,z[0]+depth],[x[4],y[2],z[1
 
 """creo la copertura adattata al telaio in modo che lo ricopra completamente"""
 panel = MKPOL([newVerts, newCells,[1]])
-panel = COLOR(RED)(OFFSET([depth, depth, depth])(SKEL_2(panel)))
+#panel = COLOR(RED)(OFFSET([depth, depth, depth])(SKEL_2(panel)))
+panel = TEXTURE([roofTexture, TRUE, FALSE, 1, 1, 0, 1, 1])(OFFSET([depth, depth, depth])(SKEL_2(panel)))
 
 """creazione del tetto: le celle sono poggiate sopra il telaio"""
 roof = STRUCT([structRoof, panel])
