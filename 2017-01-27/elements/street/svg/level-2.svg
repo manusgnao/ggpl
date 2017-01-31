@@ -15,7 +15,7 @@
    id="svg3358"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="level-2.svg">
+   sodipodi:docname="level-3.svg">
   
   <g
      inkscape:groupmode="layer"
@@ -23,8 +23,8 @@
      inkscape:label="Livello 3">
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 379.80882,2668.7627 -0.15625,247.6875 3852.99993,0 0,-247 z"
-       id="path3501-6"
+       d="m 325.72724,2667.5439 -271.4785,0 0,-1404.7434 273.05686,0 z"
+       id="path3369"
        inkscape:connector-curvature="0" />
   </g>
 </svg>
