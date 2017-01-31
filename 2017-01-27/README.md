@@ -21,12 +21,10 @@ Questa sezione contiene la posizione della base di 6 case. Questo insieme di cas
 ###Livello Street
 Questo livello ha il compito di costruire le strade che attraversano il quartiere. Come si può vedere è composto da 3 livelli: una strada percorre il quartiere in un verso, una strada lo percorre in senso opposto e una terza strada incrocia le altre 2 e permette di passare da un lato all'altro
 
-##Visualizzazione da diversi punti di vista
-
 ## Modello trovato sul web da cui questo progetto prende ispirazione
 ![alt text](https://github.com/manusgnao/ggpl/blob/master/2017-01-27/images/model.png "Modello")
 
-## Rappresentazione
+## Visualizzazione da diversi punti di vista
 
 ![alt text](https://github.com/manusgnao/ggpl/blob/master/2017-01-27/images/isolato.PNG "Isolato")
 
