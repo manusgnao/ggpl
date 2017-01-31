@@ -12,6 +12,8 @@ dx --> larghezza gradino (parametro formale X)
 dy --> lunghezza gradino (parametro formale Y)
 dz --> altezza gradino (parametro formale Z)
 """
+woodTexture = "texture/wood.png"
+
 wall=0.5
 ground=0.20
 footboard=1.0
@@ -35,11 +37,13 @@ della loro altezza e della lunghezza del pianerottolo
 def buildStair(x,y,z,tempWeight,tempHeight,tempStruct):
 	if(2.0*length/5.0<tempWeight<4.0*length/5.0):
 		step=COLOR(BROWN)(CUBOID([x, y*3, z]))
+		step = TEXTURE([woodTexture, TRUE, FALSE, 1, 1, 0, 1, 1])(CUBOID([x, y*3, z]))
+
 		traslation=STRUCT([T([1,2,3])([wall/3,tempWeight,tempHeight]),step])
 		tempWeight=tempWeight + y*3.0
 		tempHeight=tempHeight + z	
 	else:
-		step=COLOR(BROWN)(CUBOID([x, y, z]))
+		step = TEXTURE([woodTexture, TRUE, FALSE, 1, 1, 0, 1, 1])(CUBOID([x, y, z]))
 		traslation=STRUCT([T([1,2,3])([wall/3,tempWeight,tempHeight]),step])
 		tempWeight=tempWeight + y
 		tempHeight=tempHeight + z
