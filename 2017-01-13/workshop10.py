@@ -6,7 +6,7 @@ import sys, os
 """elenco di texture che verranno usate"""
 
 woodTexture = "texture/wood.png"
-wallTexture = "texture/wall.jpg"
+wallTexture = "texture/wall1.jpg"
 stoneTexture = "texture/stone.jpg"
 metalTexture = "texture/metal.jpg"
 glassTexture = "texture/glass.jpg"
@@ -16,7 +16,7 @@ roofTexture = "texture/roof.jpg"
 
 zero = CUBOID([.0,.0,.0])
 initStruct = STRUCT([zero])
-levelHeight = [30.0,30.0,20.0,30.0,30.0,20.0]
+levelHeight = [60.0,60.0,40.0,60.0,60.0,40.0]
 
 """funzione che conta quanti file ha una directory"""
 
@@ -90,10 +90,10 @@ def buildExternal(l,i,h,structure):
       pol = MKPOL([[[params[0],params[1],0.0],[params[0],params[3],0.0],[params[2],params[1],0.0],[params[2],params[3],0.0]],[[1,2,3,4]],[1]])
       offset = OFFSET([3.0, 3.0, levelHeight[l]])(pol)
       if l==0:
-        texture = TEXTURE([stoneTexture, TRUE, FALSE, 1, 1, 0, 12, 1])(offset)
+        texture = TEXTURE([stoneTexture, TRUE, FALSE, 1, 1, 0, 6, 1])(offset)
       else:
         if l==3:
-          texture = TEXTURE([wallTexture, TRUE, FALSE, 1, 1, 0, 14, 1])(offset)
+          texture = TEXTURE([wallTexture, TRUE, FALSE, 1, 1, 0, 7, 1])(offset)
         else:
           texture = TEXTURE([wallTexture, TRUE, FALSE, 1, 1, 0, 6, 1])(offset)
       translated = STRUCT([T(3)(h), texture])
@@ -127,7 +127,7 @@ def buildIntenal(l,i,h,structure):
 """funzione che costruisce una porta in legno"""
 
 def buildOneDoor(elem, j, h, door):
-  if j < 7.5:
+  if j < 14:
     build = MKPOL([[[elem[0],elem[1],0.0],[elem[2],elem[3],0.0]],[[1,2]],[1]])
     buildOffset = OFFSET([3.5, 3.5, 8.5])(build)
     buildTexture = TEXTURE([woodTexture, TRUE, FALSE, 1, 1, 0, 6, 1])(buildOffset)
@@ -144,22 +144,22 @@ def createHandle(elem,structure):
   handle = MKPOL([[[elem[0],elem[1],0.0],[elem[2],elem[3],0.0]],[[1,2]],[1]])
   handle0 = OFFSET([8.0, 1.0, 1.0])(handle)
   if (elem[0]-elem[2]<1.0) & (elem[0]-elem[2]>-1.0):
-    handle_0 = STRUCT([T([1,2,3])([-2.0,1.0,31.0]), handle0])
-    handle_1 = STRUCT([T([1,2,3])([-2.0,3.0,31.0]), handle0])
+    handle_0 = STRUCT([T([1,2,3])([-2.0,1.0,62.0]), handle0])
+    handle_1 = STRUCT([T([1,2,3])([-2.0,3.0,62.0]), handle0])
     handle1 = OFFSET([1.0, 1.5, 1.0])(handle)
-    handle_2 = STRUCT([T([1,2,3])([5.0,1.0,31.0]), handle1])
-    handle_3 = STRUCT([T([1,2,3])([5.0,6.0,31.0]), handle1])
+    handle_2 = STRUCT([T([1,2,3])([5.0,1.0,62.0]), handle1])
+    handle_3 = STRUCT([T([1,2,3])([5.0,6.0,62.0]), handle1])
     handle_01 = DIFF([handle_0,handle_1])
     handle_23 = DIFF([handle_2,handle_3])
     handle_23_2 = STRUCT([T([1])([-8.0]), handle_23])
   else:
     handle = MKPOL([[[elem[0],elem[1],0.0],[elem[2],elem[3],0.0]],[[1,2]],[1]])
     handle0 = OFFSET([1.0, 8.0, 1.0])(handle)
-    handle_0 = STRUCT([T([1,2,3])([1.0,-2.0,31.0]), handle0])
-    handle_1 = STRUCT([T([1,2,3])([3.0,-2.0,31.0]), handle0])
+    handle_0 = STRUCT([T([1,2,3])([1.0,-2.0,62.0]), handle0])
+    handle_1 = STRUCT([T([1,2,3])([3.0,-2.0,62.0]), handle0])
     handle1 = OFFSET([1.0, 1.5, 1.0])(handle)
-    handle_2 = STRUCT([T([1,2,3])([1.0,5.0,31.0]), handle1])
-    handle_3 = STRUCT([T([1,2,3])([6.0,5.0,31.0]), handle1])
+    handle_2 = STRUCT([T([1,2,3])([1.0,5.0,62.0]), handle1])
+    handle_3 = STRUCT([T([1,2,3])([6.0,5.0,62.0]), handle1])
     handle_01 = DIFF([handle_0,handle_1])
     handle_23 = DIFF([handle_2,handle_3])
     handle_23_2 = STRUCT([T([2])([-8.0]), handle_23])
@@ -181,7 +181,7 @@ def buildAllDoors(l,i,h,structure):
       finalStruct = STRUCT([d, structure, hand])
       return buildAllDoors(l,i+1,h,finalStruct)
     else:
-      h = h + 80.0
+      h = h + 160.0
       return buildAllDoors(l+1,0,h,structure)
   else:
     return structure
@@ -190,23 +190,23 @@ def buildAllDoors(l,i,h,structure):
 
 def buildOneWindow(params,h):
   q1 = MKPOL([[[params[0],params[1],0.0],[params[2],params[3],0.0]],[[1,2]],[1]])
-  q1 = OFFSET([3.5, 3.5, 30.0])(q1)
+  q1 = OFFSET([3.5, 3.5, 50.0])(q1)
   q1 = TEXTURE([glassTexture, TRUE, FALSE, 1, 1, 0, 1, 1])(q1)
   q1 = MATERIAL([0,1.36,2.55,0.5,  0,1,0,0.5, 0,0,1,0, 0,0,0,0.5, 100])(q1)
   if (params[0]-params[2]<1.0) & (params[0]-params[2]>-1.0):
     if params[1]<params[3]:
       q2 = MKPOL([[[params[0],params[1]-2.0,0.0],[params[2],params[3]+2.0,0.0]],[[1,2]],[1]])
-      q2 = OFFSET([3.5, 3.5, 40.0])(q2)
+      q2 = OFFSET([3.5, 3.5, 60.0])(q2)
     else:
       q2 = MKPOL([[[params[0],params[1]+2.0,0.0],[params[2],params[3]-2.0,0.0]],[[1,2]],[1]])
-      q2 = OFFSET([3.5, 3.5, 40.0])(q2)
+      q2 = OFFSET([3.5, 3.5, 60.0])(q2)
   if (params[1]-params[3]<1.0) & (params[1]-params[3]>-1.0):
     if params[0]<params[2]:
       q2 = MKPOL([[[params[0]-2.0,params[1],0.0],[params[2]+2.0,params[3],0.0]],[[1,2]],[1]])
-      q2 = OFFSET([3.5, 3.5, 40.0])(q2)
+      q2 = OFFSET([3.5, 3.5, 60.0])(q2)
     else:
       q2 = MKPOL([[[params[0]+2.0,params[1],0.0],[params[2]-2.0,params[3],0.0]],[[1,2]],[1]])
-      q2 = OFFSET([3.5, 3.5, 40.0])(q2)
+      q2 = OFFSET([3.5, 3.5, 60.0])(q2)
   q2 = STRUCT([T(3)(-3.5), q2])
   q2 = TEXTURE([woodTexture, TRUE, FALSE, 1, 1, 0, 1, 1])(q2)
   q = DIFFERENCE([q2,q1])
@@ -225,7 +225,7 @@ def buildAllWindows(l,i,h,structure):
       finalStruct = STRUCT([w, structure])
       return buildAllWindows(l,i+1,h,finalStruct)
     else:
-      h = h + 80.0
+      h = h + 160.0
       return buildAllWindows(l+1,0,h,structure)
   else:
     return structure
@@ -274,8 +274,8 @@ def buildSecondFloor(i,base,structure):
 def buildStairs(tempLength,tempHeight,structure):
   params = convertLines(0,3,stairLevel)
   params2 = convertLines(0,0,stairLevel)
-  height = 80.0
-  stepHeight = 5.44
+  height = 160.0
+  stepHeight = 10.44
   steps=height/stepHeight
   steps=height/steps
   stepLength = 22.5
@@ -308,12 +308,12 @@ def buildHouse():
   house=STRUCT([firstFloor,T(3)(3.0),external])
   house=STRUCT([house,T(3)(3.5),stairs_level])
   house=STRUCT([house,T(3)(3.5),internal])
-  house=STRUCT([house,T(3)(83.0),secondFloor])
-  house=STRUCT([house,T(3)(163.0),firstFloor])
+  house=STRUCT([house,T(3)(163.0),secondFloor])
+  house=STRUCT([house,T(3)(323.0),firstFloor])
   house=STRUCT([house,T(3)(3.0),doors])
-  house=STRUCT([house,T(3)(3.0),windows])
-  house=STRUCT([house,T(3)(165.0),halfRoof])
-  house=STRUCT([house,T(3)(165.0),roof_level_2])
+  house=STRUCT([house,T(3)(37.0),windows])
+  house=STRUCT([house,T(3)(325.0),halfRoof])
+  house=STRUCT([house,T(3)(325.0),roof_level_2])
   VIEW(house)
 
 buildHouse()
